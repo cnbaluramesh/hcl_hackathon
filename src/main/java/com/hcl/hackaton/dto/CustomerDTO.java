@@ -9,7 +9,7 @@ import lombok.Data;
 @Setter
 @AllArgsConstructor
 @Data
-public class Customer {
+public class CustomerDTO {
 	
 	private long customerId;
 	private String firstName;

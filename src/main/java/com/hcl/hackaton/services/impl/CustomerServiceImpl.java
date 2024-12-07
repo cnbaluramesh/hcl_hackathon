@@ -3,12 +3,14 @@ package com.hcl.hackaton.services.impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.hcl.hackaton.entity.Customer;
 import com.hcl.hackaton.repository.CustomerRepository;
 import com.hcl.hackaton.services.CustomerService;
 
-public class CustomerServiceImpl implements CustomerService  {
+@Service
+public class CustomerServiceImpl {
 
 	
 	private final CustomerRepository customerRepo;
@@ -19,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService  {
     }
     
 	@Override
-	public com.hcl.hackaton.entity.Customer createCustomer(Customer customer) {
+	public Customer createCustomer(Customer customer) {
 		Customer cust = customerRepo.save(customer);
 		return cust;
 	}
