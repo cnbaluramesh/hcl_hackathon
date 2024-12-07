@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ErrorMessageUtil {
 
     private static final Properties properties = new Properties();
