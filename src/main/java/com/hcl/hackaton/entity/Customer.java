@@ -1,5 +1,7 @@
 package com.hcl.hackaton.entity;
 
+import jakarta.persistence.*;
+
 @Entity
 @Table(name = "customer")
 public class Customer {
