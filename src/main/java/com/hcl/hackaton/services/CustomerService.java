@@ -6,9 +6,8 @@ import com.hcl.hackaton.entity.Customer;
 
 public interface CustomerService {
 
-	CustomerDTO createCustomer(Customer product);
+	Customer createCustomer(Customer product);
 
-	CustomerDTO getCustomer(Integer customerId);
 	Customer getCustomer(long customerId);
 
 	void deleteCustomer(long customerId);

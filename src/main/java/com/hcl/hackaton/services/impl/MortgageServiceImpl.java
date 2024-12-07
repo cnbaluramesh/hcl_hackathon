@@ -1,10 +1,8 @@
 package com.hcl.hackaton.services.impl;
 
 import com.hcl.hackaton.dto.MortgageDTO;
-import com.hcl.hackaton.entity.Account;
 import com.hcl.hackaton.entity.Mortgage;
 import com.hcl.hackaton.repository.MortgageRepository;
-import com.hcl.hackaton.repository.impl.MortgageRepositoryImpl;
 import com.hcl.hackaton.services.MortgageService;
 import com.hcl.hackaton.util.LoggerUtil;
 
@@ -17,10 +15,8 @@ import java.util.List;
 @Service
 public class MortgageServiceImpl implements MortgageService {
 
-    @Autowired
-    private MortgageDTO mortgageDTO;
+    //private MortgageDTO mortgageDTO;
 
-    @Autowired
     private Mortgage mortgage;
     
     @Autowired
@@ -33,15 +29,15 @@ public class MortgageServiceImpl implements MortgageService {
 
     @Override
     public BigDecimal showAccountBalance() {
-        return mortgageDTO.getMortgageBalance();
+        return mortgage.getMortgageBalance();
     }
 
     @Override
     public BigDecimal repay(BigDecimal amt) {
-        mortgageBalance=mortgageDTO.getMortgageBalance();
+        mortgageBalance=mortgage.getMortgageBalance();
         try {
             mortgageBalance = mortgageBalance.add(amt);
-            updateMortgageBalance(mortgageDTO.getMortgageId(),mortgageBalance);
+            updateMortgageBalance(mortgage.getMortgageId(),mortgageBalance);
             System.out.println("Balance after Repaid: " + mortgageBalance);
         }catch(Exception e){
         	loggerUtil.logError(getClass(), null, e);

@@ -29,13 +29,13 @@ public class OpenAPIConfig {
 
     Contact contact = new Contact();
     contact.setEmail("ckh@gmail.com");
-    contact.setName("Hackathob");
+    contact.setName("Hackathon");
     contact.setUrl("https://localhost.com");
 
     License mitLicense = new License().name("MIT License").url("https://choosealicense.com/licenses/mit/");
 
     Info info = new Info()
-        .title("Tutorial Management API")
+        .title("Hackathon Mortgage Banking API")
         .version("1.0")
         .contact(contact)
         .description("This Hackathon API exposes endpoints.").termsOfService("https://localhost/terms")

@@ -14,9 +14,7 @@ import com.hcl.hackaton.constants.Constants;
 import com.hcl.hackaton.dto.CustomerDTO;
 import com.hcl.hackaton.exception.ResourceNotFoundException;
 import com.hcl.hackaton.entity.Customer;
-import com.hcl.hackaton.services.AccountService;
 import com.hcl.hackaton.services.CustomerService;
-import com.hcl.hackaton.services.impl.CustomerServiceImpl;
 
 @RestController
 @RequestMapping("/api/v1/customer")
@@ -33,7 +31,7 @@ public class CustomerController {
     private CustomerService customerService;
     
 	@PostMapping("/createCustomer")
-    public ResponseEntity<CustomerDTO> createCustomer(@RequestBody Customer customer) throws Exception {
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) throws Exception {
 		try {
 		return ResponseEntity.ok(customerService.createCustomer(customer)); 
 		}
@@ -43,7 +41,7 @@ public class CustomerController {
 	}
    
 	@GetMapping("/getCustomer/{id}")
-    public ResponseEntity<CustomerDTO> getCustomer(@PathVariable("customerId") Integer customerId) {
+    public ResponseEntity<Customer> getCustomer(@PathVariable("customerId") Integer customerId) {
 		try {
 			
 		return ResponseEntity.ok( customerService.getCustomer(customerId));
