@@ -29,4 +29,52 @@ public class Mortgage {
     @Column(nullable = false)
     private BigDecimal mortgageBalance;
 
+
+    public double getMortgageId() {
+        return mortgageId;
+    }
+
+    public void setMortgageId(long mortgageId) {
+        this.mortgageId = mortgageId;
+    }
+
+    public double getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
+    }
+
+    public double getPropertyCost() {
+        return propertyCost;
+    }
+
+    public void setPropertyCost(long propertyCost) {
+        this.propertyCost = propertyCost;
+    }
+
+    public double getDepositAmount() {
+        return depositAmount;
+    }
+
+    public void setDepositAmount(long depositAmount) {
+        this.depositAmount = depositAmount;
+    }
+
+    public String getMortgageType() {
+        return mortgageType;
+    }
+
+    public void setMortgageType(String mortgageType) {
+        this.mortgageType = mortgageType;
+    }
+
+    public double getMortgageBalance() {
+        return mortgageBalance;
+    }
+
+    public void setMortgageBalance(long mortgageBalance) {
+        this.mortgageBalance = mortgageBalance;
+    }
 }
