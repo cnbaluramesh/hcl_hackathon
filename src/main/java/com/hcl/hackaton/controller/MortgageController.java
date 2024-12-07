@@ -25,9 +25,8 @@ public class MortgageController {
         return ResponseEntity.ok(token);
     }
     @GetMapping("/{mortgageAccountId}")
-    public Mortgage getAccountDetails(@PathVariable Long accountId) {
+    public Mortgage getMortgageAccountDetails(@PathVariable Long accountId) {
        return mortgageRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
-
     }
 
 
