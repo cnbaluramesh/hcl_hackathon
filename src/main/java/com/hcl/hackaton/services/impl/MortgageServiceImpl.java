@@ -47,10 +47,11 @@ public class MortgageServiceImpl implements MortgageService {
         if (mortgageRepository.existsById(mortgageId)) {
             mortgage.setAccountId(mortgageId);
             mortgage.setMortgageBalance(mortgageBalance);
-            return mortgageRepository.save(mortgage);
+            return mortgage;
         } else {
             throw new IllegalArgumentException("No such account found: " + mortgageId);
         }
+
     }
     public String authenticate(MortgageDTO loginDTO) {
         // Authentication logic (JWT, etc.)
