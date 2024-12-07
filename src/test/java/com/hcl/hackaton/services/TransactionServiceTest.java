@@ -1,6 +1,6 @@
 package com.hcl.hackaton.services;
 
-import com.hcl.hackaton.dto.TransferRequest;
+import com.hcl.hackaton.dto.TransferRequestDTO;
 import com.hcl.hackaton.entity.Account;
 import com.hcl.hackaton.entity.AccountType;
 import com.hcl.hackaton.entity.Transaction;
@@ -11,6 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,10 +34,10 @@ class TransactionServiceTest {
     @Test
     void testTransferFunds() {
         // Setup
-        final TransferRequest transferRequest = new TransferRequest();
+        final TransferRequestDTO transferRequest = new TransferRequestDTO();
         transferRequest.setFromAccountId(1L);
         transferRequest.setToAccountId(2L);
-        transferRequest.setAmount(500.0);
+        transferRequest.setAmount(BigDecimal.valueOf(500.0)); // Fixed
         transferRequest.setRemarks("Test Transfer");
 
         // Configure AccountRepository.findById(...).
@@ -43,15 +45,15 @@ class TransactionServiceTest {
         fromAccount.setAccountId(1L);
         fromAccount.setCustomerId(1L);
         fromAccount.setAccountNumber("FROM123");
-        fromAccount.setAccountType(String.valueOf(AccountType.valueOf("SAVINGS")));
-        fromAccount.setBalance(1000.0);
+        fromAccount.setAccountType(AccountType.SAVINGS);
+        fromAccount.setBalance(BigDecimal.valueOf(1000.0)); // Fixed
 
         final Account toAccount = new Account();
         toAccount.setAccountId(2L);
         toAccount.setCustomerId(2L);
         toAccount.setAccountNumber("TO456");
-        toAccount.setAccountType(String.valueOf(AccountType.valueOf("SAVINGS")));
-        toAccount.setBalance(500.0);
+        toAccount.setAccountType(AccountType.SAVINGS);
+        toAccount.setBalance(BigDecimal.valueOf(500.0)); // Fixed
 
         when(mockAccountRepository.findById(1L)).thenReturn(Optional.of(fromAccount));
         when(mockAccountRepository.findById(2L)).thenReturn(Optional.of(toAccount));
@@ -65,12 +67,13 @@ class TransactionServiceTest {
         // Verify AccountRepository.save() calls
         verify(mockAccountRepository, times(2)).save(any(Account.class));
 
-        // Verify specific save calls for updated balances
         verify(mockAccountRepository).save(argThat(account ->
-                account.getAccountId().equals(1L) && account.getBalance() == 500.0
+                account.getAccountId().equals(1L) &&
+                        account.getBalance().compareTo(BigDecimal.valueOf(500.0)) == 0 // Fixed
         ));
         verify(mockAccountRepository).save(argThat(account ->
-                account.getAccountId().equals(2L) && account.getBalance() == 1000.0
+                account.getAccountId().equals(2L) &&
+                        account.getBalance().compareTo(BigDecimal.valueOf(1000.0)) == 0 // Fixed
         ));
 
         // Verify TransactionRepository.save() calls
@@ -78,22 +81,22 @@ class TransactionServiceTest {
         verify(mockTransactionRepository).save(argThat(transaction ->
                 transaction.getAccountId().equals(1L) &&
                         transaction.getTransactionType().equals("DEBIT") &&
-                        transaction.getAmount() == 500.0
+                        transaction.getAmount().compareTo(BigDecimal.valueOf(500.0)) == 0 // Fixed
         ));
         verify(mockTransactionRepository).save(argThat(transaction ->
                 transaction.getAccountId().equals(2L) &&
                         transaction.getTransactionType().equals("CREDIT") &&
-                        transaction.getAmount() == 500.0
+                        transaction.getAmount().compareTo(BigDecimal.valueOf(500.0)) == 0 // Fixed
         ));
     }
 
     @Test
     void testTransferFunds_AccountRepositoryFindByIdReturnsAbsent() {
         // Setup
-        final TransferRequest transferRequest = new TransferRequest();
+        final TransferRequestDTO transferRequest = new TransferRequestDTO();
         transferRequest.setFromAccountId(1L);
         transferRequest.setToAccountId(2L);
-        transferRequest.setAmount(500.0);
+        transferRequest.setAmount(BigDecimal.valueOf(500.0)); // Fixed
         transferRequest.setRemarks("Test Transfer");
 
         // Configure AccountRepository.findById(...) to return empty for "from account"
@@ -108,10 +111,10 @@ class TransactionServiceTest {
     @Test
     void testTransferFunds_InsufficientFunds() {
         // Setup
-        final TransferRequest transferRequest = new TransferRequest();
+        final TransferRequestDTO transferRequest = new TransferRequestDTO();
         transferRequest.setFromAccountId(1L);
         transferRequest.setToAccountId(2L);
-        transferRequest.setAmount(1500.0); // More than available balance
+        transferRequest.setAmount(BigDecimal.valueOf(500.0)); // Fixed
         transferRequest.setRemarks("Test Transfer");
 
         // Configure AccountRepository.findById(...).
@@ -119,15 +122,15 @@ class TransactionServiceTest {
         fromAccount.setAccountId(1L);
         fromAccount.setCustomerId(1L);
         fromAccount.setAccountNumber("FROM123");
-        fromAccount.setAccountType(String.valueOf(AccountType.valueOf("SAVINGS")));
-        fromAccount.setBalance(1000.0);
+        fromAccount.setAccountType(AccountType.SAVINGS);
+        fromAccount.setBalance(BigDecimal.valueOf(1000.0)); // Fixed
 
         final Account toAccount = new Account();
         toAccount.setAccountId(2L);
         toAccount.setCustomerId(2L);
         toAccount.setAccountNumber("TO456");
-        toAccount.setAccountType(String.valueOf(AccountType.valueOf("SAVINGS")));
-        toAccount.setBalance(500.0);
+        toAccount.setAccountType(AccountType.SAVINGS);
+        toAccount.setBalance(BigDecimal.valueOf(500.0)); // Fixed
 
         when(mockAccountRepository.findById(1L)).thenReturn(Optional.of(fromAccount));
         when(mockAccountRepository.findById(2L)).thenReturn(Optional.of(toAccount));

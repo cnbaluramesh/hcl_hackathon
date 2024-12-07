@@ -1,8 +1,6 @@
 package com.hcl.hackaton.entity;
 
-<<<<<<< HEAD
-import jakarta.persistence.*;
-=======
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -11,10 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
->>>>>>> fced052af314c44d36470a9e7bb00f052ef2b4bf
-
 @Entity
-@Table(name = "customer")
+@Table(name = "customers")
 public class Customer {
 
     @Id
@@ -29,7 +25,7 @@ public class Customer {
     private String lastName;
 
     @Column(name = "email")
-    private boolean email;
+    private String email;
     
     @Column(name = "gender")
     private String gender;
@@ -38,7 +34,7 @@ public class Customer {
     private String phone;
     
     @Column(name = "dob")
-    private Date dob;
+    private LocalDate dob;
     
 
     public Customer() {

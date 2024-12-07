@@ -1,4 +1,4 @@
-package com.hcl.hackaton.model;
+package com.hcl.hackaton.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Customer {
+public class CustomerDTO {
 	
 	private long customerId;
 	private String firstName;

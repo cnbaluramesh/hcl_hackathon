@@ -3,11 +3,12 @@ package com.hcl.hackaton.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "mortgage")
+@Table(name = "mortgages")
 public class Mortgage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,15 +18,15 @@ public class Mortgage {
     private Long accountId;
 
     @Column(nullable = false)
-    private Long propertyCost;
+    private BigDecimal propertyCost;
 
     @Column(nullable = false)
-    private Long depositAmount;
+    private BigDecimal depositAmount;
 
     @Column(nullable = false)
     private String mortgageType;
 
     @Column(nullable = false)
-    private Long mortgageBalance;
+    private BigDecimal mortgageBalance;
 
 }

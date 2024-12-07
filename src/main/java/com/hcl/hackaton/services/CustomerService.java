@@ -1,10 +1,12 @@
 package com.hcl.hackaton.services;
 
-import com.hcl.hackaton.model.Customer;
+import com.hcl.hackaton.dto.CustomerDTO;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface CustomerService {
 
-	Customer createCustomer(Customer product);
+	CustomerDTO createCustomer(CustomerDTO product);
 
-	Customer getCustomer(Integer customerId);
+	CustomerDTO getCustomer(Integer customerId);
 }
