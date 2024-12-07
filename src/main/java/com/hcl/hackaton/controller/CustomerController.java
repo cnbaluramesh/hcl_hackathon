@@ -2,6 +2,7 @@ package com.hcl.hackaton.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.hackaton.constants.Constants;
 import com.hcl.hackaton.exception.ResourceNotFoundException;
-import com.hcl.hackaton.model.Customer;
+import com.hcl.hackaton.entity.Customer;
 import com.hcl.hackaton.services.CustomerService;
 
 @RestController
@@ -25,7 +26,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 	
-	@PostMapping("/create-customer")
+	@PostMapping("/createCustomer")
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
 		try {
 		return new ResponseEntity<Customer>(customerService.createCustomer(customer), HttpStatus.OK); 
@@ -36,8 +37,8 @@ public class CustomerController {
 		return null;
 	}
    
-	@GetMapping("/get-customer/{id}")
-    public ResponseEntity<Customer> getCustomer(@PathVariable("customerId") Integer customerId) {
+	@GetMapping("/getCustomer/{id}")
+    public ResponseEntity<Customer> getCustomer(@PathVariable("customerId") long customerId) {
 		try {
 			
 		return new ResponseEntity<Customer>( customerService.getCustomer(customerId), HttpStatus.OK);
@@ -45,6 +46,19 @@ public class CustomerController {
 		catch (Exception e) {
 			new ResourceNotFoundException(Constants.CUSTOMER_FETCH_ERROR);
 		}
+		return null;
+	}
+	
+	@DeleteMapping("deleteCustomer/{customerId}")
+	public ResponseEntity<String> deleteCustomer(@PathVariable("customerId") long customerId){
+		
+		try {
+			customerService.deleteCustomer(customerId);		
+			return new ResponseEntity<String>(Constants.CUSTOMER_DELETION_SUCCESS,HttpStatus.OK);		
+			}
+			catch (Exception e) {
+				new ResourceNotFoundException(Constants.CUSTOMER_DELETION_ERROR);
+			}
 		return null;
 	}
 }

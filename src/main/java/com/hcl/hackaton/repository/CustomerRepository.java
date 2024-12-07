@@ -1,8 +1,11 @@
 package com.hcl.hackaton.repository;
 
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public class CustomerRepository {
+import com.hcl.hackaton.entity.Customer;
+
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
+
 
 }

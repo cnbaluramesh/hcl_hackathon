@@ -1,10 +1,13 @@
 package com.hcl.hackaton.services;
 
-import com.hcl.hackaton.model.Customer;
+import com.hcl.hackaton.entity.Customer;
 
 public interface CustomerService {
 
 	Customer createCustomer(Customer product);
 
-	Customer getCustomer(Integer customerId);
+	Customer getCustomer(long customerId);
+
+	void deleteCustomer(long customerId);
+
 }
