@@ -1,5 +1,6 @@
 package com.hcl.hackaton.entity;
 
+import jakarta.persistence.*;
 import java.util.Date;
 
 import jakarta.persistence.Column;

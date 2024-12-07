@@ -1,10 +1,13 @@
 package com.hcl.hackaton.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+}
 
-	  private static final long serialVersionUID = 1L;
-
-	  public ResourceNotFoundException(String msg) {
-	    super(msg);
-	  }
-	}
+ class InvalidInputException extends RuntimeException {
+    public InvalidInputException(String message) {
+        super(message);
+    }
+}

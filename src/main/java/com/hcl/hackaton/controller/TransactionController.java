@@ -1,38 +1,21 @@
 package com.hcl.hackaton.controller;
 
-
-import com.hcl.hackaton.entity.Transaction;
+import com.hcl.hackaton.dto.TransferRequest;
 import com.hcl.hackaton.services.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/transactions")
 public class TransactionController {
 
-    public TransactionController(TransactionService transactionService) {
-        this.transactionService = transactionService;
-    }
-
+    @Autowired
     private TransactionService transactionService;
 
-    @GetMapping
-    public ResponseEntity<List<Transaction>> getAllTransactions() {
-        List<Transaction> transactions = transactionService.getAllTransactions();
-        return ResponseEntity.ok(transactions);
-    }
-
-    @GetMapping("/account/{accountId}")
-    public ResponseEntity<List<Transaction>> getTransactionsByAccountId(@PathVariable Long accountId) {
-        List<Transaction> transactions = transactionService.getTransactionsByAccountId(accountId);
-        return ResponseEntity.ok(transactions);
-    }
-
-    @PostMapping
-    public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
-        Transaction createdTransaction = transactionService.createTransaction(transaction);
-        return ResponseEntity.ok(createdTransaction);
+    @PostMapping("/transfer")
+    public ResponseEntity<String> transferFunds(@RequestBody TransferRequest transferRequest) {
+        String result = transactionService.transferFunds(transferRequest);
+        return ResponseEntity.ok(result);
     }
 }
