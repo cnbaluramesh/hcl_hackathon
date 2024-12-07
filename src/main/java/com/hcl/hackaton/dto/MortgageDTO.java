@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class MortgageDTO {
     private Long mortgageId;
     private Long accountId;
-    private Long propertyCost;
+    private BigDecimal propertyCost;
     private BigDecimal depositAmount;
     private String mortgageType;
     private BigDecimal mortgageBalance;

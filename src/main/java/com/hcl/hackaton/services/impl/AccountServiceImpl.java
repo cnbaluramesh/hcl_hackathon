@@ -5,6 +5,7 @@ import com.hcl.hackaton.entity.Account;
 import com.hcl.hackaton.repository.AccountRepository;
 import com.hcl.hackaton.services.AccountService;
 import com.hcl.hackaton.util.ErrorMessageUtil;
+import com.hcl.hackaton.util.LoggerUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class AccountServiceImpl implements AccountService{
 
 	@Autowired
 	ErrorMessageUtil errorMessageUtil;
+	
+	@Autowired
+	LoggerUtil loggerUtil;
 	
     public AccountServiceImpl(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
@@ -38,12 +42,12 @@ public class AccountServiceImpl implements AccountService{
     }
 
 	@Override
-	public Account updateAccount(Long accountId, Account account) {
-		if (accountRepository.existsById(accountId)) {
-			account.setAccountId(accountId);
+	public Account updateAccount(Account account) {
+		if (accountRepository.existsById(account.getAccountId())) {
+			account.setAccountId(account.getAccountId());
 			return accountRepository.save(account);
 		} else {
-			throw new IllegalArgumentException("Account not found with id: " + accountId);
+			throw new IllegalArgumentException(ErrorMessageUtil.getErrorMessage("ERR001") + account.getAccountId());
 		}
 	}
 
@@ -52,7 +56,7 @@ public class AccountServiceImpl implements AccountService{
 		if (accountRepository.existsById(accountId)) {
 			accountRepository.deleteById(accountId);
 		} else {
-			throw new IllegalArgumentException("Account not found with id: " + accountId);
+			throw new IllegalArgumentException(ErrorMessageUtil.getErrorMessage("ERR001") + account.getAccountId());
 		}
 	}
 }
