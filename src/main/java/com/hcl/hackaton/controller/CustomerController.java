@@ -28,14 +28,13 @@ public class CustomerController {
     }
 	
 	@PostMapping("/createCustomer")
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) throws Exception {
 		try {
 		return new ResponseEntity<Customer>(customerService.createCustomer(customer), HttpStatus.OK); 
 		}
 		catch (Exception e) {
-			new Exception(Constants.CUSTOMER_CREATION_ERROR);
+			 throw new Exception(Constants.CUSTOMER_CREATION_ERROR);
 		}
-		return null;
 	}
    
 	@GetMapping("/getCustomer/{id}")
