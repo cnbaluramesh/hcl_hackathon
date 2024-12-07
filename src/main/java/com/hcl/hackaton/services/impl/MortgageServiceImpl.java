@@ -2,9 +2,12 @@ package com.hcl.hackaton.services.impl;
 
 import com.hcl.hackaton.dto.MortgageDTO;
 import com.hcl.hackaton.services.MortgageService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MortgageServiceImpl implements MortgageService {
 
+    @Autowired
+    private MortgageDTO mortgageDTO;
     Long mortgageId;
     Long accountId;
     Long propertyCost;
@@ -14,15 +17,17 @@ public class MortgageServiceImpl implements MortgageService {
 
     @Override
     public long showAccountBalance() {
-        return mortgageBalance;
+        return mortgageDTO.getMortgageBalance();
     }
 
     @Override
     public long repay(long amt) {
-        System.out.println("Balance Before Payment: " + mortgageBalance);
-        amt=10;
-        mortgageBalance = mortgageBalance + amt;
-        System.out.println("Balance after Repaid: " + mortgageBalance);
+        try {
+            mortgageBalance = mortgageBalance + amt;
+            System.out.println("Balance after Repaid: " + mortgageBalance);
+        }catch(Exception e){
+            e.getMessage();
+        }
         return mortgageBalance;
     }
 
