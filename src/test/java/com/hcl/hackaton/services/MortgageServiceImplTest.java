@@ -10,15 +10,21 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-
-
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 
 
 @ExtendWith(MockitoExtension.class)
 public class MortgageServiceImplTest {
 
     @Mock
+    double testAccountBalance=100L;
+    @Mock
     private MortgageRepositoryImpl mortgageRepositoryImpl;
+
+    @Mock
+    private Mortgage testMortgage;
+
 
     @BeforeEach
     void setUp() {
@@ -27,6 +33,19 @@ public class MortgageServiceImplTest {
 
     @Test
     void testShowAccountBalance() {
-
+        assertNotNull(testMortgage.getDepositAmount());
     }
+
+    @Test
+    void repay() {
+        assertNotNull(testMortgage.getDepositAmount());
+    }
+
+    @Test
+    void authenticate() {
+        assertNotNull(testMortgage.getDepositAmount());
+    }
+
+
+
 }
