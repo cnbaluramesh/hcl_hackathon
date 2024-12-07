@@ -35,9 +35,9 @@ public class AccountController {
 	}
 	
 	@PutMapping("/{accountId}")
-	public ResponseEntity<Account> updateAccount(@PathVariable Long accountId, @RequestBody Account account) {
+	public ResponseEntity<Account> updateAccount(@RequestBody Account account) {
 		try {
-			Account updatedAccount = accountService.updateAccount(accountId, account);
+			Account updatedAccount = accountService.updateAccount(account);
 			return ResponseEntity.ok(updatedAccount);
 		} catch (RuntimeException e) {
 			return ResponseEntity.notFound().build();

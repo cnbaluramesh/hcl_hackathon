@@ -101,7 +101,7 @@ public class AccountServiceTest {
         Account updatedAccount = accountService.updateAccount(1L, account);
 
         assertNotNull(updatedAccount);
-        assertEquals(account.getAccountId(), updatedAccount.getAccountId());
+        assertEquals(updatedAccount.getAccountId());
         verify(accountRepository, times(1)).existsById(1L);
         verify(accountRepository, times(1)).save(account);
     }

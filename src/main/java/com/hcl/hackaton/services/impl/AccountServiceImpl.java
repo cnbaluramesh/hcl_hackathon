@@ -21,27 +21,29 @@ public class AccountServiceImpl implements AccountService{
 	@Autowired
 	LoggerUtil loggerUtil;
 	
+    private AccountRepository accountRepository;
+	
     public AccountServiceImpl(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
-    private AccountRepository accountRepository;
-
+    @Override
     public List<Account> getAllAccounts() {
         return accountRepository.findAll();
     }
 
-	@Override
+    @Override
 	public Account getAccountById(Long accountId) {
 		return accountRepository.findById(accountId)
 				.orElseThrow(() -> new IllegalArgumentException(ErrorMessageUtil.getErrorMessage("ERR001") + accountId));
 	}
 
+    @Override
     public Account createAccount(Account account) {
         return accountRepository.save(account);
     }
 
-	@Override
+    @Override
 	public Account updateAccount(Account account) {
 		if (accountRepository.existsById(account.getAccountId())) {
 			account.setAccountId(account.getAccountId());
@@ -51,12 +53,12 @@ public class AccountServiceImpl implements AccountService{
 		}
 	}
 
-	@Override
+    @Override
 	public void deleteAccount(Long accountId) {
 		if (accountRepository.existsById(accountId)) {
 			accountRepository.deleteById(accountId);
 		} else {
-			throw new IllegalArgumentException(ErrorMessageUtil.getErrorMessage("ERR001") + account.getAccountId());
+			throw new IllegalArgumentException(ErrorMessageUtil.getErrorMessage("ERR001") + accountId);
 		}
 	}
 }
