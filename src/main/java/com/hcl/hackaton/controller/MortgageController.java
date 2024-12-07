@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 public class MortgageController {
 
@@ -29,8 +31,8 @@ public class MortgageController {
        return mortgageRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
     }
     @PostMapping("/repay/{amt}")
-    public ResponseEntity<Long> repayDetails(long amt) {
-        long token = mortgageService.repay(amt);
+    public ResponseEntity<BigDecimal> repayDetails(BigDecimal amt) {
+        BigDecimal token = mortgageService.repay(amt);
         return ResponseEntity.ok(token);
     }
 
