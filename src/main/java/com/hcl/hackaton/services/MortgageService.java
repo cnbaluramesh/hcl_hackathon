@@ -5,16 +5,17 @@ import com.hcl.hackaton.entity.Account;
 import com.hcl.hackaton.entity.Mortgage;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
 public interface MortgageService {
 
-    public abstract long showAccountBalance();
+    public abstract BigDecimal showAccountBalance();
 
-    long repay(long amt);
+    public BigDecimal repay(BigDecimal amt);
 
-    Mortgage updateMortgageBalance(Long accountId, long mortgageBalance);
+    public Mortgage updateMortgageBalance(Long mortgageId, BigDecimal mortgageBalance);
 
     public String authenticate(MortgageDTO mortgageDTO);
 

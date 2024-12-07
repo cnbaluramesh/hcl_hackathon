@@ -8,6 +8,7 @@ import com.hcl.hackaton.repository.impl.MortgageRepositoryImpl;
 import com.hcl.hackaton.services.MortgageService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class MortgageServiceImpl implements MortgageService {
@@ -22,18 +23,18 @@ public class MortgageServiceImpl implements MortgageService {
 
     @Autowired
     private MortgageRepositoryImpl mortgageRepositoryImpl;
-    Long mortgageBalance;
+    BigDecimal mortgageBalance;
 
     @Override
-    public long showAccountBalance() {
+    public BigDecimal showAccountBalance() {
         return mortgageDTO.getMortgageBalance();
     }
 
     @Override
-    public long repay(long amt) {
+    public BigDecimal repay(BigDecimal amt) {
         mortgageBalance=mortgageDTO.getMortgageBalance();
         try {
-            mortgageBalance = mortgageBalance + amt;
+            mortgageBalance = mortgageBalance.add(amt);
             updateMortgageBalance(mortgageDTO.getMortgageId(),mortgageBalance);
             System.out.println("Balance after Repaid: " + mortgageBalance);
         }catch(Exception e){
@@ -42,10 +43,8 @@ public class MortgageServiceImpl implements MortgageService {
         return mortgageBalance;
     }
 
-
-
     @Override
-    public Mortgage updateMortgageBalance(Long mortgageId,long mortgageBalance) {
+    public Mortgage updateMortgageBalance(Long mortgageId, BigDecimal mortgageBalance) {
         if (mortgageRepository.existsById(mortgageId)) {
             mortgage.setAccountId(mortgageId);
             mortgage.setMortgageBalance(mortgageBalance);
