@@ -19,10 +19,9 @@ public class MortgageServiceImpl implements MortgageService {
     @Autowired
     private Mortgage mortgage;
     @Autowired
-            private MortgageRepository mortgageRepository;
+    private MortgageRepository mortgageRepository;
 
-    @Autowired
-    private MortgageRepositoryImpl mortgageRepositoryImpl;
+
     BigDecimal mortgageBalance;
 
     @Override
