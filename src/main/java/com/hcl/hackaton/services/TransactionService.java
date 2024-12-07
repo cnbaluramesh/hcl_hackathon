@@ -1,6 +1,6 @@
 package com.hcl.hackaton.services;
 
-import com.hcl.hackaton.dto.TransferRequest;
+import com.hcl.hackaton.dto.TransferRequestDTO;
 import com.hcl.hackaton.entity.Account;
 import com.hcl.hackaton.entity.Transaction;
 import com.hcl.hackaton.repository.AccountRepository;
@@ -18,7 +18,7 @@ public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
 
-    public String transferFunds(TransferRequest transferRequest) {
+    public String transferFunds(TransferRequestDTO transferRequest) {
         // Fetch source and destination accounts
         Account fromAccount = accountRepository.findById(transferRequest.getFromAccountId())
                 .orElseThrow(() -> new IllegalArgumentException("Source account not found."));
@@ -26,13 +26,13 @@ public class TransactionService {
                 .orElseThrow(() -> new IllegalArgumentException("Destination account not found."));
 
         // Validate sufficient balance
-        if (fromAccount.getBalance() < transferRequest.getAmount()) {
+        if (fromAccount.getBalance().compareTo(transferRequest.getAmount()) < 0) {
             throw new IllegalArgumentException("Insufficient balance in the source account.");
         }
 
         // Perform transfer
         // Debit from source account
-        fromAccount.setBalance(fromAccount.getBalance() - transferRequest.getAmount());
+        fromAccount.setBalance(fromAccount.getBalance().subtract(transferRequest.getAmount()));
         accountRepository.save(fromAccount);
 
         Transaction debitTransaction = new Transaction();
@@ -44,7 +44,7 @@ public class TransactionService {
         transactionRepository.save(debitTransaction);
 
         // Credit to destination account
-        toAccount.setBalance(toAccount.getBalance() + transferRequest.getAmount());
+        toAccount.setBalance(toAccount.getBalance().add(transferRequest.getAmount()));
         accountRepository.save(toAccount);
 
         Transaction creditTransaction = new Transaction();

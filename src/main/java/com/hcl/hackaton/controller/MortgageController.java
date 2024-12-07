@@ -28,12 +28,15 @@ public class MortgageController {
     public Mortgage getMortgageAccountDetails(@PathVariable Long accountId) {
        return mortgageRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
     }
-
-
     @PostMapping("/repay/{amt}")
     public ResponseEntity<Long> repayDetails(long amt) {
         long token = mortgageService.repay(amt);
         return ResponseEntity.ok(token);
+    }
+
+    @GetMapping("/accountBalance")
+    public Mortgage showAccountBalance(@PathVariable Long accountId) {
+        return mortgageRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
     }
 
 }

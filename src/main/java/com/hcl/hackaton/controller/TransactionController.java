@@ -1,6 +1,6 @@
 package com.hcl.hackaton.controller;
 
-import com.hcl.hackaton.dto.TransferRequest;
+import com.hcl.hackaton.dto.TransferRequestDTO;
 import com.hcl.hackaton.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @PostMapping("/transfer")
-    public ResponseEntity<String> transferFunds(@RequestBody TransferRequest transferRequest) {
+    public ResponseEntity<String> transferFunds(@RequestBody TransferRequestDTO transferRequest) {
         String result = transactionService.transferFunds(transferRequest);
         return ResponseEntity.ok(result);
     }

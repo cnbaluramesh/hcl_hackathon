@@ -3,6 +3,7 @@ package com.hcl.hackaton.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -21,7 +22,7 @@ public class Transaction {
     private String transactionType; // "CREDIT" or "DEBIT"
 
     @Column(nullable = false)
-    private Double amount;
+    private BigDecimal amount;
 
     @Column(nullable = false)
     private LocalDateTime transactionDate;

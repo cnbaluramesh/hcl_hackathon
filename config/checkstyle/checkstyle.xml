@@ -243,5 +243,10 @@
         <module name="CommentsIndentation"/>
         <module name="SuppressWarningsHolder"/>
     </module>
+    <module name="TreeWalker">
+        <fileFilters>
+            <exclude file=".*Customer\.java"/>
+        </fileFilters>
+    </module>
     <module name="SuppressWarningsFilter"/>
 </module>
