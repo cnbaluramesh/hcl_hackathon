@@ -43,14 +43,14 @@ class TransactionServiceTest {
         fromAccount.setAccountId(1L);
         fromAccount.setCustomerId(1L);
         fromAccount.setAccountNumber("FROM123");
-        fromAccount.setAccountType(AccountType.valueOf("SAVINGS"));
+        fromAccount.setAccountType(String.valueOf(AccountType.valueOf("SAVINGS")));
         fromAccount.setBalance(1000.0);
 
         final Account toAccount = new Account();
         toAccount.setAccountId(2L);
         toAccount.setCustomerId(2L);
         toAccount.setAccountNumber("TO456");
-        toAccount.setAccountType(AccountType.valueOf("SAVINGS"));
+        toAccount.setAccountType(String.valueOf(AccountType.valueOf("SAVINGS")));
         toAccount.setBalance(500.0);
 
         when(mockAccountRepository.findById(1L)).thenReturn(Optional.of(fromAccount));
@@ -119,14 +119,14 @@ class TransactionServiceTest {
         fromAccount.setAccountId(1L);
         fromAccount.setCustomerId(1L);
         fromAccount.setAccountNumber("FROM123");
-        fromAccount.setAccountType(AccountType.valueOf("SAVINGS"));
+        fromAccount.setAccountType(String.valueOf(AccountType.valueOf("SAVINGS")));
         fromAccount.setBalance(1000.0);
 
         final Account toAccount = new Account();
         toAccount.setAccountId(2L);
         toAccount.setCustomerId(2L);
         toAccount.setAccountNumber("TO456");
-        toAccount.setAccountType(AccountType.valueOf("SAVINGS"));
+        toAccount.setAccountType(String.valueOf(AccountType.valueOf("SAVINGS")));
         toAccount.setBalance(500.0);
 
         when(mockAccountRepository.findById(1L)).thenReturn(Optional.of(fromAccount));
