@@ -1,5 +1,6 @@
 package com.hcl.hackaton.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import com.hcl.hackaton.constants.Constants;
 import com.hcl.hackaton.dto.CustomerDTO;
 import com.hcl.hackaton.exception.ResourceNotFoundException;
 import com.hcl.hackaton.entity.Customer;
+import com.hcl.hackaton.services.AccountService;
 import com.hcl.hackaton.services.CustomerService;
 import com.hcl.hackaton.services.impl.CustomerServiceImpl;
 
@@ -20,17 +22,20 @@ import com.hcl.hackaton.services.impl.CustomerServiceImpl;
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
 
-	private final CustomerServiceImpl customerService;
-
-    // Constructor Injection
-    public CustomerController(CustomerServiceImpl customerService) {
-        this.customerService = customerService;
-    }
+	/*
+	 * private final CustomerServiceImpl customerService;
+	 * 
+	 * // Constructor Injection public CustomerController(CustomerServiceImpl
+	 * customerService) { this.customerService = customerService; }
+	 */
 	
+    @Autowired
+    private CustomerService customerService;
+    
 	@PostMapping("/createCustomer")
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) throws Exception {
+    public ResponseEntity<CustomerDTO> createCustomer(@RequestBody Customer customer) throws Exception {
 		try {
-		return new ResponseEntity<Customer>(customerService.createCustomer(customer), HttpStatus.OK); 
+		return ResponseEntity.ok(customerService.createCustomer(customer)); 
 		}
 		catch (Exception e) {
 			 throw new Exception(Constants.CUSTOMER_CREATION_ERROR);
@@ -38,15 +43,15 @@ public class CustomerController {
 	}
    
 	@GetMapping("/getCustomer/{id}")
-    public ResponseEntity<Customer> getCustomer(@PathVariable("customerId") Integer customerId) {
+    public ResponseEntity<CustomerDTO> getCustomer(@PathVariable("customerId") Integer customerId) {
 		try {
 			
-		return new ResponseEntity<Customer>( customerService.getCustomer(customerId), HttpStatus.OK);
+		return ResponseEntity.ok( customerService.getCustomer(customerId));
 		}
 		catch (Exception e) {
-			new ResourceNotFoundException(Constants.CUSTOMER_FETCH_ERROR);
+			throw new ResourceNotFoundException(Constants.CUSTOMER_FETCH_ERROR);
 		}
-		return null;
+		//return null;
 	}
 	
 	@GetMapping("/deleteCustomer/{id}")
@@ -56,8 +61,8 @@ public class CustomerController {
 		return new ResponseEntity<String>( "Customer Deleted Succcessfully", HttpStatus.OK);
 		}
 		catch (Exception e) {
-			new ResourceNotFoundException(Constants.CUSTOMER_FETCH_ERROR);
+			throw new ResourceNotFoundException(Constants.CUSTOMER_FETCH_ERROR);
 		}
-		return null;
+		//return null;
 	}
 }

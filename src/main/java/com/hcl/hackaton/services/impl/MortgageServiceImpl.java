@@ -6,6 +6,8 @@ import com.hcl.hackaton.entity.Mortgage;
 import com.hcl.hackaton.repository.MortgageRepository;
 import com.hcl.hackaton.repository.impl.MortgageRepositoryImpl;
 import com.hcl.hackaton.services.MortgageService;
+import com.hcl.hackaton.util.LoggerUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +22,12 @@ public class MortgageServiceImpl implements MortgageService {
 
     @Autowired
     private Mortgage mortgage;
+    
     @Autowired
     private MortgageRepository mortgageRepository;
-
+    
+	@Autowired
+	LoggerUtil loggerUtil;
 
     BigDecimal mortgageBalance;
 
@@ -39,17 +44,18 @@ public class MortgageServiceImpl implements MortgageService {
             updateMortgageBalance(mortgageDTO.getMortgageId(),mortgageBalance);
             System.out.println("Balance after Repaid: " + mortgageBalance);
         }catch(Exception e){
-            e.getMessage();
+        	loggerUtil.logError(getClass(), null, e);
         }
         return mortgageBalance;
     }
 
     @Override
     public Mortgage updateMortgageBalance(Long mortgageId, BigDecimal mortgageBalance) {
+    	Mortgage copiedMortgage = new Mortgage();
         if (mortgageRepository.existsById(mortgageId)) {
-            mortgage.setAccountId(mortgageId);
-            mortgage.setMortgageBalance(mortgageBalance);
-            return mortgage;
+        	copiedMortgage.setAccountId(mortgageId);
+        	copiedMortgage.setMortgageBalance(mortgageBalance);
+            return copiedMortgage;
         } else {
             throw new IllegalArgumentException("No such account found: " + mortgageId);
         }
@@ -72,7 +78,7 @@ public class MortgageServiceImpl implements MortgageService {
                 mortgageRepository.deleteById(accountId);
             }
         }catch(Exception e){
-            e.getMessage();
+        	loggerUtil.logError(getClass(), null, e);
         }
     }
 

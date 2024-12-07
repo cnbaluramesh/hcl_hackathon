@@ -4,6 +4,7 @@ package com.hcl.hackaton.controller;
 import com.hcl.hackaton.entity.Account;
 import com.hcl.hackaton.services.AccountService;
 import com.hcl.hackaton.util.CommonValidationsUtil;
+import com.hcl.hackaton.util.LoggerUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,9 @@ public class AccountController {
     
 	@Autowired
 	CommonValidationsUtil validationsUtil;
+	
+	@Autowired
+	LoggerUtil loggerUtil;
 
 	@GetMapping
 	public List<Account> getAllAccounts() {
@@ -31,6 +35,7 @@ public class AccountController {
 			Account account = accountService.getAccountById(accountId);
 			return ResponseEntity.ok(account);
 		} catch (IllegalArgumentException e) {
+			loggerUtil.logError(getClass(), null, e);
 			return ResponseEntity.notFound().build();
 		}}
 
@@ -46,6 +51,7 @@ public class AccountController {
 			Account updatedAccount = accountService.updateAccount(account);
 			return ResponseEntity.ok(updatedAccount);
 		} catch (RuntimeException e) {
+			loggerUtil.logError(getClass(), null, e);
 			return ResponseEntity.notFound().build();
 		}
 	}
@@ -56,6 +62,7 @@ public class AccountController {
 			accountService.deleteAccount(accountId);
 			return ResponseEntity.noContent().build();
 		} catch (RuntimeException e) {
+			loggerUtil.logError(getClass(), null, e);
 			return ResponseEntity.notFound().build();
 		}
 	}

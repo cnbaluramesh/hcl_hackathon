@@ -23,11 +23,12 @@ public abstract class MortgageRepositoryImpl implements MortgageRepository {
 
     @Override
     public Mortgage findById(long accountId) {
-        mortgage.setMortgageId(mortgageDTO.getMortgageId());
-        mortgage.setMortgageType(mortgageDTO.getMortgageType());
-        mortgage.setMortgageBalance(mortgageDTO.getMortgageBalance());
-        mortgage.setPropertyCost(mortgageDTO.getPropertyCost());
-         return mortgage;
+    	Mortgage copiedMortgage = new Mortgage();
+    	copiedMortgage.setMortgageId(mortgageDTO.getMortgageId());
+    	copiedMortgage.setMortgageType(mortgageDTO.getMortgageType());
+    	copiedMortgage.setMortgageBalance(mortgageDTO.getMortgageBalance());
+    	copiedMortgage.setPropertyCost(mortgageDTO.getPropertyCost());
+        return copiedMortgage;
     }
 
 }

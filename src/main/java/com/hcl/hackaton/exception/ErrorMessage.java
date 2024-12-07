@@ -11,7 +11,7 @@ public class ErrorMessage {
 
   public ErrorMessage(int statusCode, Date timestamp, String message, String description) {
     this.statusCode = statusCode;
-    this.timestamp = timestamp;
+    this.timestamp = new Date(timestamp.getTime());
     this.message = message;
     this.description = description;
   }
@@ -21,7 +21,7 @@ public class ErrorMessage {
   }
 
   public Date getTimestamp() {
-    return timestamp;
+	 return new Date(this.timestamp.getTime());
   }
 
   public String getMessage() {
