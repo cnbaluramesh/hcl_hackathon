@@ -1,6 +1,7 @@
 package com.hcl.hackaton.controller;
 
 
+import com.hcl.hackaton.dto.TransferRequest;
 import com.hcl.hackaton.entity.Account;
 import com.hcl.hackaton.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,4 +48,5 @@ public class AccountsController {
         accountService.deleteAccount(accountId);
         return ResponseEntity.ok("Account deleted successfully.");
     }
+
 }
