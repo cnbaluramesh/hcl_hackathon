@@ -3,6 +3,8 @@ package com.hcl.hackaton.controller;
 
 import com.hcl.hackaton.entity.Account;
 import com.hcl.hackaton.services.AccountService;
+import com.hcl.hackaton.util.CommonValidationsUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,9 @@ public class AccountController {
 
     @Autowired
     private AccountService accountService;
+    
+	@Autowired
+	CommonValidationsUtil validationsUtil;
 
 	@GetMapping
 	public List<Account> getAllAccounts() {
@@ -31,6 +36,7 @@ public class AccountController {
 
 	@PostMapping
 	public Account createAccount(@RequestBody Account account) {
+		validationsUtil.validateAccount(account);
 		return accountService.createAccount(account);
 	}
 	

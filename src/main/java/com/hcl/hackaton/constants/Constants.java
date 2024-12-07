@@ -9,4 +9,6 @@ public class Constants {
 	public static String CUSTOMER_DELETION_ERROR = "Error while deleting customer";
 
 	public static String CUSTOMER_DELETION_SUCCESS = "Customer is deleted successfully";
+	
+	public static int MINIMUM_ACCOUNT_BALANCE = 500; //TODO: Should be moved to database
 }

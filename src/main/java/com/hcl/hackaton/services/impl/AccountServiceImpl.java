@@ -22,7 +22,7 @@ public class AccountServiceImpl implements AccountService{
 	LoggerUtil loggerUtil;
 	
     private AccountRepository accountRepository;
-	
+    
     public AccountServiceImpl(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
@@ -35,7 +35,7 @@ public class AccountServiceImpl implements AccountService{
     @Override
 	public Account getAccountById(Long accountId) {
 		return accountRepository.findById(accountId)
-				.orElseThrow(() -> new IllegalArgumentException(ErrorMessageUtil.getErrorMessage("ERR001") + accountId));
+				.orElseThrow(() -> new IllegalArgumentException(ErrorMessageUtil.getErrorMessage("ERR002") + accountId));
 	}
 
     @Override
