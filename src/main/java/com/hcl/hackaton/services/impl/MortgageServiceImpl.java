@@ -22,6 +22,7 @@ public class MortgageServiceImpl implements MortgageService {
 
     @Override
     public long repay(long amt) {
+        mortgageBalance=mortgageDTO.getMortgageBalance();
         try {
             mortgageBalance = mortgageBalance + amt;
             System.out.println("Balance after Repaid: " + mortgageBalance);
