@@ -6,7 +6,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Data // TODO:: as lombak is not working, adding manual getters and setters
+@Data
 @Entity
 @Table(name = "accounts")
 public class Account {

@@ -4,7 +4,9 @@ package com.hcl.hackaton.services.impl;
 import com.hcl.hackaton.entity.Account;
 import com.hcl.hackaton.repository.AccountRepository;
 import com.hcl.hackaton.services.AccountService;
+import com.hcl.hackaton.util.ErrorMessageUtil;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,9 @@ import java.util.List;
 @Service
 public class AccountServiceImpl implements AccountService{
 
+	@Autowired
+	ErrorMessageUtil errorMessageUtil;
+	
     public AccountServiceImpl(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
@@ -25,7 +30,7 @@ public class AccountServiceImpl implements AccountService{
 	@Override
 	public Account getAccountById(Long accountId) {
 		return accountRepository.findById(accountId)
-				.orElseThrow(() -> new IllegalArgumentException("Account not found with id: " + accountId));
+				.orElseThrow(() -> new IllegalArgumentException(ErrorMessageUtil.getErrorMessage("ERR001") + accountId));
 	}
 
     public Account createAccount(Account account) {
