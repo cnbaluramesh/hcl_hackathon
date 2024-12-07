@@ -12,7 +12,6 @@ public class MortgageController {
   @Autowired
   private MortgageService mortgageService;
 
-
     @GetMapping("/{mortgageAccountId}")
     public ResponseEntity<Long> getAccountDetails(@PathVariable Long accountId) {
         long account = mortgageService.showAccountBalance();
