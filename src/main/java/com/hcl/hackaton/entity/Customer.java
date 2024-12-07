@@ -1,5 +1,8 @@
 package com.hcl.hackaton.entity;
 
+<<<<<<< HEAD
+import jakarta.persistence.*;
+=======
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -8,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+>>>>>>> fced052af314c44d36470a9e7bb00f052ef2b4bf
 
 @Entity
 @Table(name = "customer")
