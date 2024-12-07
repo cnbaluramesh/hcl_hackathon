@@ -7,10 +7,12 @@ import com.hcl.hackaton.repository.MortgageRepository;
 import com.hcl.hackaton.repository.impl.MortgageRepositoryImpl;
 import com.hcl.hackaton.services.MortgageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Service
 public class MortgageServiceImpl implements MortgageService {
 
     @Autowired
