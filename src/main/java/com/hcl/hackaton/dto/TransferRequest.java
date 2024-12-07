@@ -9,5 +9,4 @@ public class TransferRequest {
     private Double amount;      // Amount to transfer
     private String remarks;     // Optional transfer comments
 
-
 }
