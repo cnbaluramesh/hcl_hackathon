@@ -2,6 +2,7 @@ package com.hcl.hackaton.controller;
 
 
 import com.hcl.hackaton.dto.MortgageDTO;
+import com.hcl.hackaton.entity.Mortgage;
 import com.hcl.hackaton.repository.MortgageRepository;
 import com.hcl.hackaton.services.MortgageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,13 @@ public class MortgageController {
 
 
     @PostMapping("/login")
-    public <LoginDTO> ResponseEntity<String> login(@RequestBody MortgageDTO mortgageDTO) {
+    public ResponseEntity<String> login(@RequestBody MortgageDTO mortgageDTO) {
         String token = mortgageService.authenticate(mortgageDTO);
         return ResponseEntity.ok(token);
     }
     @GetMapping("/{mortgageAccountId}")
-    public void getAccountDetails(@PathVariable Long accountId) {
-      // return mortgageRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
+    public Mortgage getAccountDetails(@PathVariable Long accountId) {
+       return mortgageRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
 
     }
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 @Repository
-    public abstract class MortgageRepository implements JpaRepository<Mortgage, Long> {
-
+    public interface MortgageRepository extends JpaRepository<Mortgage, Long> {
+    public Mortgage findById(long accountId);
 
 }
